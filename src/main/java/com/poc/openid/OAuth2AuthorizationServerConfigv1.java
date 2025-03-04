@@ -9,8 +9,8 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 
 
-@Configuration
-public class OAuth2AuthorizationServerConfig {
+//@Configuration
+public class OAuth2AuthorizationServerConfigv1 {
 
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
