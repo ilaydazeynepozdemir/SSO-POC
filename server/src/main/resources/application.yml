@@ -1,6 +1,7 @@
 server:
   port: 9000
-
+  ssl:
+    enabled: false
 spring:
   security:
     oauth2:

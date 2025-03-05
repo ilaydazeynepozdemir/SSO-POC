@@ -1,0 +1,30 @@
+<md:EntityDescriptor entityID="https://your-idp.com/idp" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
+    <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <md:KeyDescriptor use="signing">
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                    <ds:X509Certificate>MIIDhTCCAm2gAwIBAgIUbwPQ2+2WN/0f0rrM7l8Wba7XgKYwDQYJKoZIhvcNAQEL
+                        BQAwUjELMAkGA1UEBhMCVFIxDzANBgNVBAgMBnR1cmtleTEPMA0GA1UEBwwGYW5r
+                        YXJhMSEwHwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQwHhcNMjQxMTIy
+                        MTI0NzUwWhcNMjQxMjIyMTI0NzUwWjBSMQswCQYDVQQGEwJUUjEPMA0GA1UECAwG
+                        dHVya2V5MQ8wDQYDVQQHDAZhbmthcmExITAfBgNVBAoMGEludGVybmV0IFdpZGdp
+                        dHMgUHR5IEx0ZDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKb6z8Re
+                        BSMUsLWspmYIC+wf9mI/E+Qt9RHFO2ioaJ5RNq2w0MXnDUee0DpJOIsrW/cr6OvD
+                        KKFZb3XtPGVRYREUUaFD1zBnZ6WZoWXsS72PE62hNid/rH6MK5clFWRy6jsX92JM
+                        UEhzfBGAaBRhfCA74A49qMk8BouD1/PX51Idnj/VgAbas0BHLnSywInCuMPhUu8L
+                        23l+aXUvGYA+NHf/uYgsmCGruE94LKkd0ds7jSUvB7075q8sRqSV4GXufHaPEsX1
+                        KCC1OHsV/3j0xZ2gSqmQF1b/eJhbNDe4YNTi3PMZUvwdUW2LobzjZ3mWGeAhkb1/
+                        NEev9cLDx++9K/kCAwEAAaNTMFEwHQYDVR0OBBYEFIUd4nefjU8KLGFooWwZ0oOd
+                        DiQAMB8GA1UdIwQYMBaAFIUd4nefjU8KLGFooWwZ0oOdDiQAMA8GA1UdEwEB/wQF
+                        MAMBAf8wDQYJKoZIhvcNAQELBQADggEBAEYDh/4GEqYtfVVWz3KkhdvcLKhxWN+t
+                        5z0PG2+M73+mcGAThX8JYnghe2+Kud7Nuf4mBxgWJlOI3yTY4fLpJBCVs4nbsJwT
+                        mtarPLwFEHQh/g6+Uk0IL47AYJ3e5zTFKdkp/GMdhgEF7N0z6egp/IHoLaZWCSMY
+                        Qn87YgkDhCcIPlnuV2V3rOo0Id+XT/a7v6iI0Zvi9yytm+1wCKlv9uq3AGwBh6cW
+                        7jV43S3PGH7uo2mnk8wLf+KcKnMKWdOtO/+mcSjN2gGfO4+E1i/ivq1/Cx2APfco
+                        ZydyF7bj3biefE3sfp7JicSrGk5YtInT/DGN67Yv97bRkS3NOGthwng=</ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </md:KeyDescriptor>
+        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://your-idp.com/sso"/>
+    </md:IDPSSODescriptor>
+</md:EntityDescriptor>
