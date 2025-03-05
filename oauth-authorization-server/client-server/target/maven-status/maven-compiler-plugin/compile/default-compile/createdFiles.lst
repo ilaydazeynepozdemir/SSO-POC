@@ -1,4 +1,10 @@
 com/baeldung/config/WebClientConfig.class
+com/baeldung/config/AppConfig.class
+com/baeldung/config/OAuth2ClientConfig.class
+com/baeldung/GitHubController.class
 com/baeldung/config/SecurityConfig.class
 com/baeldung/OAuth2ClientApplication.class
+com/baeldung/web/JiraApiController.class
+com/baeldung/GitHubService.class
+com/baeldung/web/JiraOAuthController.class
 com/baeldung/web/ArticlesController.class

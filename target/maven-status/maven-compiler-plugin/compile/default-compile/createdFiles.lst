@@ -1,8 +1,0 @@
-com/poc/Application.class
-com/poc/openid/UserInfoEndpoint.class
-com/poc/openid/OAuth2AuthorizationServerConfigv1.class
-com/poc/openid/AuthorizationController.class
-com/poc/openid/SecurityConfig.class
-com/poc/openid/server/AuthorizationServerConfig.class
-com/poc/openid/server/RSAKeyPairGenerator.class
-com/poc/openid/TokenController.class

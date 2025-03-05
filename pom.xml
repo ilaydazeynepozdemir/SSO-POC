@@ -79,14 +79,6 @@
 		<module>oauth-authorization-server/resource-server</module>
 		<module>oauth-authorization-server/spring-authorization-server</module>
 		<module>oauth-authorization-server/client-server</module>
-		<module>server</module>
-		<module>resource-server</module>
-		<module>api-client-app</module>
-
-
-
-		<!-- commented out because these don't build on Jenkins -->
-		<!-- <module>oauth-legacy/oauth-ui-implicit-angular</module> <module>oauth-legacy/oauth-ui-password-angular</module> -->
 	</modules>
 
 	<profiles>

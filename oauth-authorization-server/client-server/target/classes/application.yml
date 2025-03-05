@@ -5,30 +5,24 @@ logging:
   level:
     root: INFO
     org.springframework.web: INFO
-    org.springframework.security: INFO
-    org.springframework.security.oauth2: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
 
 spring:
   security:
     oauth2:
       client:
         registration:
-          articles-client-oidc:
-            provider: spring
-            client-id: articles-client
-            client-secret: secret
+          github:
+            provider: github
+            client-id: Ov23liNxSW9NHjbjR6qO  # GitHub'dan aldığınız client_id
+            client-secret: 5882f7951ec448cb51691035a2eda433e8417b17  # GitHub'dan aldığınız client_secret
+            client-name: oauth-github
+            scope: read:user,user:email # GitHub API'sine hangi izinleri alacağınızı belirleyin
+            redirect-uri: "http://localhost:8080/login/oauth2/code/github"
             authorization-grant-type: authorization_code
-            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
-            scope: openid
-            client-name: articles-client-oidc
-          articles-client-authorization-code:
-            provider: spring
-            client-id: articles-client
-            client-secret: secret
-            authorization-grant-type: authorization_code
-            redirect-uri: "http://127.0.0.1:8080/authorized"
-            scope: articles.read
-            client-name: articles-client-authorization-code
         provider:
-          spring:
-            issuer-uri: http://auth-server:9000
+          github:
+            authorization-uri: https://github.com/login/oauth/authorize
+            token-uri: https://github.com/login/oauth/access_token
+            user-info-uri: https://api.github.com/user

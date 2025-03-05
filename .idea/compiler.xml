@@ -7,14 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="resource-server" />
-        <module name="api-client-app" />
         <module name="client-server" />
-        <module name="sso-resource-server" />
         <module name="spring-authorization-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="api-client-app" target="17" />
       <module name="sso-idp-poc" target="1.8" />
+      <module name="sso-resource-server" target="17" />
+      <module name="sso-server" target="17" />
       <module name="tutorial" target="17" />
     </bytecodeTargetLevel>
   </component>

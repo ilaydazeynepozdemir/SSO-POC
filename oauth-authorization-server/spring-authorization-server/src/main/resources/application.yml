@@ -5,28 +5,26 @@ logging:
   level:
     root: INFO
     org.springframework.web: INFO
-    org.springframework.security: INFO
-    org.springframework.security.oauth2: INFO
+    org.springframework.security: TRACE
+    org.springframework.security.oauth2: TRACE
 
 spring:
   security:
     oauth2:
       authorizationserver:
-        issuer: http://auth-server:9000
+        issuer: http://localhost:9000
         client:
           articles-client:
             registration:
-              client-id: articles-client
-              client-secret: "{noop}secret"
-              client-name: Articles Client
+              client-id: Ov23liNxSW9NHjbjR6qO
+              client-secret: 5882f7951ec448cb51691035a2eda433e8417b17
+              client-name: oauth-github
               client-authentication-methods:
                 - client_secret_basic
               authorization-grant-types:
                 - authorization_code
                 - refresh_token
               redirect-uris:
-                - http://127.0.0.1:8080/login/oauth2/code/articles-client-oidc
-                - http://127.0.0.1:8080/authorized
-              scopes:
-                - openid
-                - articles.read
+                - http://localhost:8080/login/oauth2/code/github
+                - http://localhost:8080/authorized
+              scopes: read:user,user:email
