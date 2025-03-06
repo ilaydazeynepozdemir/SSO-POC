@@ -14,7 +14,7 @@ spring:
       authorizationserver:
         issuer: http://localhost:9000
         client:
-          articles-client:
+          oauth-github:
             registration:
               client-id: Ov23liNxSW9NHjbjR6qO
               client-secret: 5882f7951ec448cb51691035a2eda433e8417b17
@@ -25,6 +25,5 @@ spring:
                 - authorization_code
                 - refresh_token
               redirect-uris:
-                - http://localhost:8080/login/oauth2/code/github
-                - http://localhost:8080/authorized
+                - https://aeeb-176-240-136-21.ngrok-free.app/login/oauth2/code/github
               scopes: read:user,user:email

@@ -1,16 +1,26 @@
 package com.baeldung;
 
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.io.IOException;
 
 @Controller
 public class GitHubController {
@@ -25,6 +35,10 @@ public class GitHubController {
 
     @Value("${spring.security.oauth2.client.registration.github.scope}")
     private String scope;
+
+   @Autowired
+   private OAuth2AuthorizedClientService authorizedClientService;
+
 
     @GetMapping("/home")
     public String home() {
@@ -121,5 +135,45 @@ public class GitHubController {
         }
         return null;
     }
+
+
+
+
+    @GetMapping("/github-token")
+    public String getGitHubToken(@AuthenticationPrincipal OAuth2User principal) {
+        OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(
+                "github", principal.getName());
+
+        if (authorizedClient != null) {
+            return "Access Token: " + authorizedClient.getAccessToken().getTokenValue();
+        }
+        return "Token bulunamadı";
+    }
+
+    @GetMapping("/github-info")
+    public ResponseEntity<String> getGithubInfo(@AuthenticationPrincipal OAuth2User principal, OAuth2AuthenticationToken authentication) {
+        // OAuth2AuthenticationToken'dan OAuth2AuthorizedClient alıyoruz
+        OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(
+                authentication.getAuthorizedClientRegistrationId(),
+                authentication.getName()
+        );
+
+        // Access Token'ı alıyoruz
+        String accessToken = authorizedClient.getAccessToken().getTokenValue();
+
+        // GitHub kullanıcı bilgilerine erişim
+        return ResponseEntity.ok("GitHub User Info: " + principal.getAttributes() + "\nAccess Token: " + accessToken);
+    }
+
+    @GetMapping("/redirect-github-profile")
+    public void redirectToGithubProfile(@AuthenticationPrincipal OAuth2User principal, HttpServletResponse response) throws IOException, IOException {
+        String githubUsername = (String) principal.getAttribute("login"); // GitHub kullanıcı adı
+        if (githubUsername != null) {
+            response.sendRedirect("https://github.com/" + githubUsername);
+        } else {
+            response.sendRedirect("https://github.com"); // Kullanıcı bilgisi alınamazsa genel GitHub sayfasına yönlendir
+        }
+    }
+
 
 }

@@ -24,6 +24,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class DefaultSecurityConfig {
 
     @Bean
+    public OAuth2AuthorizationServerConfigurer oauth2AuthorizationServerConfigurer() {
+        return new OAuth2AuthorizationServerConfigurer();
+    }
+
+    @Bean
     @Order(1)
     SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
@@ -38,10 +43,11 @@ public class DefaultSecurityConfig {
         http.csrf().disable().authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest()
                         .authenticated())
                 .formLogin(form -> form
-                        .defaultSuccessUrl("http://localhost:8080/login", true)  // Başarılı giriş sonrası yönlendirme URL'si
+                        .defaultSuccessUrl("https://aeeb-176-240-136-21.ngrok-free.app/login", true)  // Başarılı giriş sonrası yönlendirme URL'si
                 );
         return http.build();
     }
+
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {

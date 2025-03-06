@@ -1,10 +1,8 @@
-/Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/web/JiraApiController.java
+/Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/ArticlesController.java
 /Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/OAuth2ClientApplication.java
 /Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/config/WebClientConfig.java
 /Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/GitHubController.java
 /Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/config/OAuth2ClientConfig.java
-/Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/config/SecurityConfig.java
+/Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/GitHubLoginController.java
 /Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/config/AppConfig.java
-/Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/web/JiraOAuthController.java
 /Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/GitHubService.java
-/Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/web/ArticlesController.java
