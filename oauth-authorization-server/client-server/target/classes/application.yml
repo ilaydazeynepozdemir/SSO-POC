@@ -11,8 +11,8 @@ logging:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/oauth2
-    username: poc_user
-    password: poc_password
+    username: postgres
+    password: LFB2023!!q
     driver-class-name: org.postgresql.Driver
   security:
     oauth2:

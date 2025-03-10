@@ -20,11 +20,6 @@ public class OAuth2ClientConfig {
         return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository);
     }*/
 
-    /*@Bean
-    public JdbcOperations jdbcOperations(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }*/
-
     @Bean
     public OAuth2AuthorizedClientService authorizedClientService(
             JdbcOperations jdbcOperations, ClientRegistrationRepository clientRegistrationRepository) {

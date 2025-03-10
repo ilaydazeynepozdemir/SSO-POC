@@ -18,7 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.util.UriComponentsBuilder;
+import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 
@@ -36,8 +39,10 @@ public class GitHubController {
     @Value("${spring.security.oauth2.client.registration.github.scope}")
     private String scope;
 
-   @Autowired
-   private OAuth2AuthorizedClientService authorizedClientService;
+    @Autowired
+    private WebClient webClient;
+    @Autowired
+    private OAuth2AuthorizedClientService authorizedClientService;
 
 
     @GetMapping("/home")
@@ -46,9 +51,38 @@ public class GitHubController {
     }
 
     @GetMapping("/")
-    public String home2() {
-        return "defaultilayda";
+    public String home2(@AuthenticationPrincipal OAuth2User principal) {
+        OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(
+                "github", principal.getName());
+
+        if (authorizedClient != null) {
+            String accessToken = authorizedClient.getAccessToken().getTokenValue();
+
+            // GitHub API'sine istek göndermek
+            WebClient webClient = WebClient.create("https://api.github.com");
+
+            String githubUserInfo = webClient.get()
+                    .uri("/user")
+                    .header("Authorization", "Bearer " + accessToken)  // Bearer token'ı burada doğru göndermeniz önemli
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .onErrorResume(WebClientResponseException.class, e -> {
+                        System.err.println("Error: " + e.getMessage());
+                        System.err.println("Response Body: " + e.getResponseBodyAsString());
+                        return Mono.empty();
+                    })
+                    .block();
+
+            if (githubUserInfo != null) {
+                // Eğer API'den başarılı yanıt aldıysak, kullanıcının GitHub dashboard'una yönlendirebiliriz
+                return "redirect:https://github.com/settings/profile"; // GitHub Dashboard'a yönlendirme
+            }
+        }
+
+        // Eğer token geçersizse ya da oturum yoksa, kullanıcıyı GitHub'a yönlendir
+        return "redirect:https://github.com/login/oauth/authorize";
     }
+
 
     @GetMapping("/fail")
     public String fail() {
@@ -135,8 +169,6 @@ public class GitHubController {
         }
         return null;
     }
-
-
 
 
     @GetMapping("/github-token")
