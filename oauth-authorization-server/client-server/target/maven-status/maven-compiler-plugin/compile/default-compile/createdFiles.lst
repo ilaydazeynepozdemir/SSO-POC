@@ -1,0 +1,8 @@
+com/baeldung/config/WebClientConfig.class
+com/baeldung/config/AppConfig.class
+com/baeldung/config/OAuth2ClientConfig.class
+com/baeldung/GitHubController.class
+com/baeldung/OAuth2ClientApplication.class
+com/baeldung/GitHubLoginController.class
+com/baeldung/ArticlesController.class
+com/baeldung/GitHubService.class

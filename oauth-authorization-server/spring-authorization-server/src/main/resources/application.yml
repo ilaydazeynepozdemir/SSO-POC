@@ -1,0 +1,29 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: TRACE
+    org.springframework.security.oauth2: TRACE
+
+spring:
+  security:
+    oauth2:
+      authorizationserver:
+        issuer: http://localhost:9000
+        client:
+          oauth-github:
+            registration:
+              client-id: Ov23liNxSW9NHjbjR6qO
+              client-secret: 5882f7951ec448cb51691035a2eda433e8417b17
+              client-name: oauth-github
+              client-authentication-methods:
+                - client_secret_basic
+              authorization-grant-types:
+                - authorization_code
+                - refresh_token
+              redirect-uris:
+                - https://aeeb-176-240-136-21.ngrok-free.app/login/oauth2/code/github
+              scopes: read:user,user:email

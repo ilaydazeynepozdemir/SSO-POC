@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="resource-server" />
+        <module name="client-server" />
+        <module name="spring-authorization-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api-client-app" target="17" />
+      <module name="sso-idp-poc" target="1.8" />
+      <module name="sso-resource-server" target="17" />
+      <module name="sso-server" target="17" />
+      <module name="tutorial" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-client-app" options="-parameters" />
+      <module name="client-server" options="-parameters" />
+      <module name="resource-server" options="-parameters" />
+      <module name="spring-authorization-server" options="-parameters" />
+      <module name="sso-idp-poc" options="-parameters" />
+      <module name="sso-resource-server" options="-parameters" />
+      <module name="sso-server" options="-parameters" />
+      <module name="tutorial" options="-parameters" />
+    </option>
+  </component>
+</project>
