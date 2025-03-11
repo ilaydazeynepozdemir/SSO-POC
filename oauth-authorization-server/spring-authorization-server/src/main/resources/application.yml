@@ -27,3 +27,16 @@ spring:
               redirect-uris:
                 - https://aeeb-176-240-136-21.ngrok-free.app/login/oauth2/code/github
               scopes: read:user,user:email
+
+              google:
+                client-id: 1050151621152-udj2p6nqfgbp3hj33nkeae1tsjetat2k.apps.googleusercontent.com
+                client-secret: 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
+                scope: profile, email
+                authorization-grant-type: authorization_code
+                redirect-uri: "https://5233-176-240-136-21.ngrok-free.app/callback"
+                client-name: Google
+              provider:
+                google:
+                  authorization-uri: https://accounts.google.com/o/oauth2/auth
+                  token-uri: https://oauth2.googleapis.com/token
+                  user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo

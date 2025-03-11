@@ -9,26 +9,17 @@
         <module name="resource-server" />
         <module name="client-server" />
         <module name="spring-authorization-server" />
+        <module name="saml-authorization-server" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="api-client-app" target="17" />
-      <module name="sso-idp-poc" target="1.8" />
-      <module name="sso-resource-server" target="17" />
-      <module name="sso-server" target="17" />
-      <module name="tutorial" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="api-client-app" options="-parameters" />
       <module name="client-server" options="-parameters" />
       <module name="resource-server" options="-parameters" />
+      <module name="saml-authorization-server" options="-parameters" />
       <module name="spring-authorization-server" options="-parameters" />
-      <module name="sso-idp-poc" options="-parameters" />
-      <module name="sso-resource-server" options="-parameters" />
-      <module name="sso-server" options="-parameters" />
-      <module name="tutorial" options="-parameters" />
+      <module name="spring-security-oauth" options="" />
     </option>
   </component>
 </project>

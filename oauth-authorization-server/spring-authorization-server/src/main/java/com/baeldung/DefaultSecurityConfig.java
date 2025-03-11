@@ -1,4 +1,4 @@
-package com.baeldung.config;
+package com.baeldung;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -42,9 +42,7 @@ public class DefaultSecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest()
                         .authenticated())
-                .formLogin(form -> form
-                        .defaultSuccessUrl("https://aeeb-176-240-136-21.ngrok-free.app/login", true)  // Başarılı giriş sonrası yönlendirme URL'si
-                );
+                .formLogin(withDefaults());
         return http.build();
     }
 
@@ -67,7 +65,7 @@ public class DefaultSecurityConfig {
     UserDetailsService users() {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user = User.builder()
-            .username("nkarakas@mirketsecurity.com")
+            .username("ilaydazeynepozdemir@gmail.com")
             .password("admin")
             .passwordEncoder(encoder::encode)
             .roles("USER")
