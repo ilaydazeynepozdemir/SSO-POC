@@ -1,42 +1,26 @@
 server:
   port: 9000
 
-logging:
-  level:
-    root: INFO
-    org.springframework.web: INFO
-    org.springframework.security: TRACE
-    org.springframework.security.oauth2: TRACE
-
 spring:
   security:
     oauth2:
       authorizationserver:
-        issuer: http://localhost:9000
-        client:
-          oauth-github:
-            registration:
-              client-id: Ov23liNxSW9NHjbjR6qO
-              client-secret: 5882f7951ec448cb51691035a2eda433e8417b17
-              client-name: oauth-github
-              client-authentication-methods:
-                - client_secret_basic
-              authorization-grant-types:
-                - authorization_code
-                - refresh_token
-              redirect-uris:
-                - https://aeeb-176-240-136-21.ngrok-free.app/login/oauth2/code/github
-              scopes: read:user,user:email
+        issuer:  https://245e-176-240-136-21.ngrok-free.app
+  datasource:
+    url: jdbc:postgresql://localhost:5432/oauth2
+    username: postgres
+    password: LFB2023!!q
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      mode: always
 
-              google:
-                client-id: 1050151621152-udj2p6nqfgbp3hj33nkeae1tsjetat2k.apps.googleusercontent.com
-                client-secret: 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
-                scope: profile, email
-                authorization-grant-type: authorization_code
-                redirect-uri: "https://5233-176-240-136-21.ngrok-free.app/callback"
-                client-name: Google
-              provider:
-                google:
-                  authorization-uri: https://accounts.google.com/o/oauth2/auth
-                  token-uri: https://oauth2.googleapis.com/token
-                  user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+logging:
+  level:
+    org.springframework.security: DEBUG

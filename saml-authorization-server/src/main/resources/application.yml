@@ -2,7 +2,7 @@ spring:
   security:
     saml2:
       identity-provider:
-        metadata-uri: https://accounts.google.com/saml2/idp (Google IDP metadata URL)
+        metadata-uri: https://accounts.google.com/saml2/idp
         entity-id: YOUR_IDP_ENTITY_ID
         signing-certificate: classpath:your-signing-cert.crt
         private-key: classpath:your-private-key.key

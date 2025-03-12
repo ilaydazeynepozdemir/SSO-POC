@@ -1,5 +1,4 @@
 com/baeldung/OAuth2AuthorizationServerApplication.class
-com/baeldung/config/DefaultSecurityConfig$1.class
-com/baeldung/config/AuthorizationServerConfig.class
-com/baeldung/config/DefaultSecurityConfig.class
-com/baeldung/GoogleResource.class
+com/baeldung/KeyPairGeneratorUtils.class
+com/baeldung/ClientTestController.class
+com/baeldung/AuthServerConfig.class
