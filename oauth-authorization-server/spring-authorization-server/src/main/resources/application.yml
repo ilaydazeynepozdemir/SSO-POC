@@ -1,11 +1,28 @@
 server:
   port: 9000
+  servlet:
+    session:
+      cookie:
+        name: JSESSIONID  # **Aynı session çerezini kullan**
+        #same-site: none  # **Üçüncü taraf çerezlere izin ver**
+        secure: false  # **HTTPS kullanıyorsan bunu aç (Lokal test için kapat)**
 
 spring:
+  session:
+    store-type: redis
+    redis:
+      namespace: sso-dashboard-session
+  redis:
+    host: localhost
+    port: 6379
+  data:
+    redis:
+      repositories:
+        enabled: false
   security:
     oauth2:
       authorizationserver:
-        issuer:  https://245e-176-240-136-21.ngrok-free.app
+        issuer:  https://a867-176-240-136-21.ngrok-free.app
   datasource:
     url: jdbc:postgresql://localhost:5432/oauth2
     username: postgres
@@ -23,4 +40,8 @@ spring:
 
 logging:
   level:
-    org.springframework.security: DEBUG
+    org.springframework:
+      security: TRACE
+      session: DEBUG
+      data:
+        redis: INFO

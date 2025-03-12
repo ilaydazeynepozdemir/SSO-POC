@@ -1,12 +1,34 @@
 server:
   port: 8080
 
+  servlet:
+    session:
+      cookie:
+        name: JSESSIONID  # **Aynı session çerezini kullan**
+        #same-site: none  # **Üçüncü taraf çerezlere izin ver**
+        secure: false  # **Lokal test için**
+
+
 logging:
   level:
-    org.springframework.security: DEBUG
+    org.springframework:
+      security: TRACE
+      session: DEBUG
+      data:
+        redis: INFO
 
 spring:
-
+  session:
+    store-type: redis
+    redis:
+      namespace: sso-dashboard-session
+  data:
+    redis:
+      repositories:
+        enabled: false
+  redis:
+    host: localhost
+    port: 6379
   datasource:
     url: jdbc:postgresql://localhost:5432/oauth2
     username: postgres
@@ -19,7 +41,7 @@ spring:
           sso-dashboard-client:
             provider: custom-provider
             client-id: sso-dashboard-client
-            client-secret: secret
+            client-secret: "secret"
             authorization-grant-type: authorization_code
             redirect-uri: "http://localhost:8080/login/oauth2/code/sso-dashboard-client"
             scope: openid, profile, email

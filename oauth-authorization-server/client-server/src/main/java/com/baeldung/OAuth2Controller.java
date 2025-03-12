@@ -8,8 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,16 +27,36 @@ public class OAuth2Controller {
     }
 
     @GetMapping("/oauth2/redirect-to-google")
-    public ResponseEntity<?> redirectToGoogle() {
-        String googleAuthUrl = "https://accounts.google.com/o/oauth2/auth" +
-                "?client_id=sso-dashboard-client" +
-                "&redirect_uri=http://localhost:8080/oauth2/callback" +// Callback URL
-                "&response_type=code" +
-                "&scope=openid%20email%20profile%20" +
-                "&prompt=none"; // Kullanıcıdan tekrar login isteme
+    public ResponseEntity<?> redirectToGoogle(@RequestParam("code") String code) {
+        String idToken;
+        try {
+            idToken = tokenService.getIdToken(code);
+        } catch (Exception e) {
+            System.out.println(e);
+            // Kullanıcı Google'dan çıkış yapmış, IDP'ye (localhost:8080/login) yönlendir.
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .location(URI.create("http://localhost:8080/login"))
+                    .build();
+        }
 
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(googleAuthUrl)).build();
+        String googleToken;
+        try {
+            googleToken = exchangeTokenForGoogle(idToken);
+        } catch (Exception e) {
+            System.out.println(e);
+            // Google’dan alınan token geçersizse, kullanıcıyı IDP’ye yönlendir
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .location(URI.create("http://localhost:8080/login"))
+                    .build();
+        }
+
+        // Google’a giriş yapmadan yönlendir
+        String googleUrl = "https://console.cloud.google.com/?authuser=0&prompt=none&access_token=" + googleToken;
+
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(googleUrl)).build();
     }
+
+
 
     @GetMapping("/login/oauth2/code/sso-dashboard-client")
     public ResponseEntity<?> callback(
@@ -57,7 +75,7 @@ public class OAuth2Controller {
     }
 
     @GetMapping("/oauth2/callback")
-    public ResponseEntity<?> googleCallback(@RequestParam("code") String code) {
+    public ResponseEntity<?> googleCallback( @RegisteredOAuth2AuthorizedClient("sso-dashboard") OAuth2AuthorizedClient authorizedClient , @RequestParam("code") String code) {
         // Google'dan ID Token al
         String idToken = tokenService.getIdToken(code);
 
@@ -128,9 +146,8 @@ public class OAuth2Controller {
 
 
 
-    /*@GetMapping("/oauth2/callback")
-    public ResponseEntity<?> handleOAuth2Callback(@RequestParam("code") String authorizationCode) {
-        String accessToken = tokenService.getAccessToken(authorizationCode);
-        return ResponseEntity.ok(Map.of("access_token", accessToken));
-    }*/
+    @GetMapping("/callbackTest")
+    public ResponseEntity<String> callback(@RequestParam Map<String, String> params) {
+        return ResponseEntity.ok("Callback Params: " + params.toString());
+    }
 }

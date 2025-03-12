@@ -79,7 +79,6 @@
 		<module>oauth-authorization-server/resource-server</module>
 		<module>oauth-authorization-server/spring-authorization-server</module>
 		<module>oauth-authorization-server/client-server</module>
-		<!--module>saml-authorization-server</module-->
 	</modules>
 
 	<profiles>

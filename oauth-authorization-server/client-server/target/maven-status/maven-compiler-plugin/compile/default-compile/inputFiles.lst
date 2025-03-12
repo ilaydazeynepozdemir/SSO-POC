@@ -2,5 +2,7 @@
 /Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/OAuth2ClientApplication.java
 /Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/OAuth2LoginController.java
 /Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/GoogleApiController.java
+/Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/DebugController.java
 /Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/OAuth2TokenService.java
 /Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/OAuth2Controller.java
+/Users/ilaydazeynepozdemir/Desktop/workspace/SSO-POC/oauth-authorization-server/client-server/src/main/java/com/baeldung/RedisConnectionTest.java

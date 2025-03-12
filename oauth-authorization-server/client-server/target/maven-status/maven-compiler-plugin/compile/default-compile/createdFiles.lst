@@ -1,6 +1,9 @@
 com/baeldung/OAuth2TokenService.class
+com/baeldung/SecurityConfig$1.class
 com/baeldung/OAuth2LoginController.class
 com/baeldung/OAuth2ClientApplication.class
 com/baeldung/GoogleApiController.class
+com/baeldung/RedisConnectionTest.class
+com/baeldung/DebugController.class
 com/baeldung/OAuth2Controller.class
 com/baeldung/SecurityConfig.class

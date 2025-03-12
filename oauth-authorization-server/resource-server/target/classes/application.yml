@@ -13,4 +13,4 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://245e-176-240-136-21.ngrok-free.app
+          issuer-uri: https://a867-176-240-136-21.ngrok-free.app
