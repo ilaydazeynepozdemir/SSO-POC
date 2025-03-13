@@ -13,6 +13,7 @@ logging:
   level:
     org.springframework:
       security: TRACE
+      web.client: TRACE
       session: DEBUG
       data:
         redis: INFO
@@ -42,11 +43,13 @@ spring:
             provider: custom-provider
             client-id: sso-dashboard-client
             client-secret: "secret"
+            client-authentication-method: client_secret_basic
             authorization-grant-type: authorization_code
             redirect-uri: "http://localhost:8080/login/oauth2/code/sso-dashboard-client"
             scope: openid, profile, email
         provider:
           custom-provider:
+            issuer-uri: https://a867-176-240-136-21.ngrok-free.app
             authorization-uri: http://localhost:9000/oauth2/authorize
             token-uri: http://localhost:9000/oauth2/token
             user-info-uri: http://localhost:9000/userinfo

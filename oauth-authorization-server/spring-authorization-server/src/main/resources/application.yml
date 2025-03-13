@@ -42,6 +42,7 @@ logging:
   level:
     org.springframework:
       security: TRACE
+      web.client: TRACE
       session: DEBUG
       data:
         redis: INFO

@@ -24,6 +24,7 @@ public class OAuth2TokenService {
         params.add("grant_type", "authorization_code");
         params.add("client_id", "sso-dashboard-client");
         params.add("client_secret", "secret");
+        params.add("client_authentication_method", "client_secret_basic");
         params.add("redirect_uri", "http://localhost:8080/login/oauth2/code/sso-dashboard-client");
         params.add("code", authorizationCode);
 
@@ -51,16 +52,18 @@ public class OAuth2TokenService {
         params.add("grant_type", "authorization_code");
         params.add("client_id", "sso-dashboard-client");
         params.add("client_secret", "secret");
+        //params.add("client_authentication_method", "client_secret_basic");
         params.add("redirect_uri", "http://localhost:8080/login/oauth2/code/sso-dashboard-client");
         params.add("code", authorizationCode);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.setBasicAuth("sso-dashboard-client", "secret");
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
 
         ResponseEntity<Map> response = restTemplate.exchange(
-                "http://localhost:9000/oauth2/token",
+                "https://a867-176-240-136-21.ngrok-free.app/oauth2/token",
                 HttpMethod.POST,
                 request,
                 Map.class

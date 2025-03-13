@@ -1,4 +1,5 @@
 com/baeldung/OAuth2AuthorizationServerApplication.class
+com/baeldung/LoginController.class
 com/baeldung/ClientTestController.class
 com/baeldung/RedisConnectionTest.class
 com/baeldung/AuthServerConfig.class

@@ -41,6 +41,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.security.KeyPair;
 import java.security.interfaces.RSAPublicKey;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -84,10 +86,10 @@ public class AuthServerConfig {
     public ClientRegistrationRepository clientRegistrationRepository(PasswordEncoder passwordEncoder) {
         ClientRegistration clientRegistration = ClientRegistration.withRegistrationId("sso-dashboard-client")
                 .clientId("sso-dashboard-client")
-        //.clientSecret(passwordEncoder.encode("secret"))
-                .clientSecret("{noop}secret")
+        .clientSecret(passwordEncoder.encode("secret"))
+                //.clientSecret("{noop}secret")
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("http://localhost:8080/login/oauth2/code/sso-dashboard-client")
+                .redirectUri("http://localhost:8080/oauth2/login/oauth2/code/sso-dashboard-client")
                 .scope("openid", "profile", "email")
                 .authorizationUri("http://localhost:9000/oauth2/authorize")
                 .tokenUri("http://localhost:9000/oauth2/token")
@@ -117,9 +119,9 @@ public class AuthServerConfig {
         if (existingClient.isEmpty()) { // Eğer yoksa kaydet
             RegisteredClient client = RegisteredClient.withId(UUID.randomUUID().toString())
                     .clientId("sso-dashboard-client")
-                    //.clientSecret(passwordEncoder.encode("secret"))
-                    .clientSecret("{noop}secret")
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                    .clientSecret(passwordEncoder.encode("secret"))
+                    //.clientSecret("{noop}secret")
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                     .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                     .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                     .redirectUri("http://localhost:8080/login/oauth2/code/sso-dashboard-client")
@@ -154,8 +156,13 @@ public class AuthServerConfig {
                 context.getClaims().claim(IdTokenClaimNames.SUB, authentication.getName());
                 context.getClaims().claim("email", authentication.getName());
                 context.getClaims().claim("name", authentication.getName());
-                context.getClaims().claim("aud", "//iam.googleapis.com/projects/1050151621152/locations/global/workloadIdentityPools/my-pool/providers/my-provider");
+                context.getClaims().claim("email_verified", true); // Zorla email_verified = true
+                List<String> audience = new ArrayList<>();
+                audience.add("sso-dashboard-client");
+                context.getClaims().audience(audience);
             }
+
+
         };
     }
 
@@ -171,13 +178,6 @@ public class AuthServerConfig {
                 .build();
         return new InMemoryUserDetailsManager(user);
     }
-
-    /*@Bean
-    public ProviderSettings providerSettings() {
-        return ProviderSettings.builder()
-                .issuer("https://a867-176-240-136-21.ngrok-free.app") // 🌟 NGROK URL
-                .build();
-    }*/
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {

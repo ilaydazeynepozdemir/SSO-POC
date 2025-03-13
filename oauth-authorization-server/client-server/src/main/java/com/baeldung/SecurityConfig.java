@@ -29,13 +29,18 @@ public class SecurityConfig {
                         .authorizationEndpoint(authorization ->
                                 authorization.authorizationRequestRepository(new HttpSessionOAuth2AuthorizationRequestRepository())
                         )
-                        .defaultSuccessUrl("/", true) // ** Yetkilendirme kodu başarıyla alındığında ana sayfaya yönlendir**
-                        .failureUrl("/login?error") // ** Hata durumunda login sayfasına yönlendir**
-                )
+                        //.defaultSuccessUrl("/", true) // ** Yetkilendirme kodu başarıyla alındığında ana sayfaya yönlendir**
+                        .successHandler((request, response, authentication) -> {
+                            String redirectUrl = "/oauth2/redirect-to-google?code="
+                                    + request.getParameter("code"); // Yetkilendirme kodunu al
+                            response.sendRedirect(redirectUrl);
+                        })
+                        .failureUrl("/login?error"))
                 .sessionManagement(session -> session
                         .sessionFixation().none() // **Session ID'nin değişmesini engelle**
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                );
+                )
+                .formLogin(formlogin -> formlogin.loginPage("http://localhost:9000/login"));
 
         return http.build();
     }

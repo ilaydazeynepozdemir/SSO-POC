@@ -33,9 +33,4 @@ public class OAuth2LoginController {
         String accessToken = authorizedClient.getAccessToken().getTokenValue();
         return ResponseEntity.ok("Access Token: " + accessToken);
     }
-
-    @GetMapping("/login")
-    public String login() {
-        return "redirect:/oauth2/authorization/sso-dashboard-client";
-    }
 }
